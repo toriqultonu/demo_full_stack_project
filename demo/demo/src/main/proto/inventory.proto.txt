@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option java_package = "com.marketplace.grpc";
+option java_multiple_files = true;
+
+message SparePart {
+  int64 id = 1;
+  string name = 2;
+  string category = 3;
+  double price = 4;
+  int32 stock = 5;
+}
+
+message GetPartRequest {
+  int64 id = 1;
+}
+
+message AddPartRequest {
+  SparePart part = 1;
+}
+
+service InventoryService {
+  rpc AddPart (AddPartRequest) returns (SparePart);
+  rpc GetPart (GetPartRequest) returns (SparePart);
+}
