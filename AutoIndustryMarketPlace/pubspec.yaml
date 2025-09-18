@@ -1,0 +1,29 @@
+name: auto_industry
+description: Flutter Web frontend for the car repair marketplace.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.2.2  # For REST API calls
+  graphql_flutter:   # For GraphQL queries/mutations/subscriptions
+  web_socket_channel: ^3.0.1  # For WebSockets (real-time updates), note: websocket_channel -> web_socket_channel for web compatibility
+  provider: ^6.1.2  # State management
+  flutter_secure_storage: ^9.2.2  # For storing JWT tokens (uses localStorage on web)
+  go_router: ^14.3.0  # Routing
+  intl: ^0.19.0  # For date formatting if needed
+  flutter_web_plugins:  # For web-specific configs
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+  # Add assets if needed, e.g., images
