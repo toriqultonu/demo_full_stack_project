@@ -1,0 +1,47 @@
+type Query {
+    requests: [RepairRequest]
+    quotes(requestId: String!): [Quote]
+}
+
+type Mutation {
+    submitRequest(input: RepairRequestInput!): RepairRequest
+    submitQuote(input: QuoteInput!): Quote
+}
+
+type RepairRequest {
+    id: ID!
+    ownerId: String!
+    description: String!
+    carBrand: String!
+    carModel: String!
+    year: Int!
+    partsNeeded: [String!]!
+}
+
+input RepairRequestInput {
+    ownerId: String!
+    description: String!
+    carBrand: String!
+    carModel: String!
+    year: Int!
+    partsNeeded: [String!]!
+}
+
+type Quote {
+    id: ID!
+    repairShopId: String!
+    requestId: String!
+    priceBreakdown: JSON!
+    estimatedHours: Float!
+    totalPrice: Float!
+}
+
+input QuoteInput {
+    repairShopId: String!
+    requestId: String!
+    priceBreakdown: JSON!
+    estimatedHours: Float!
+    totalPrice: Float!
+}
+
+scalar JSON

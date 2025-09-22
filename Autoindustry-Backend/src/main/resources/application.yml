@@ -1,0 +1,61 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: auto-industry-backend
+  datasource:
+    url: jdbc:postgresql://postgres:5432/marketplace
+    username: user
+    password: pass
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  data:
+    mongodb:
+      uri: mongodb://mongo:27017/requests
+  cache:
+    type: redis
+  redis:
+    host: redis
+    port: 6379
+  kafka:
+    bootstrap-servers: kafka:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: inventory-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080  # For self-signed, adjust as needed
+
+# Encryption secret (use env var in prod)
+jasypt:
+  encryptor:
+    password: secretkey
+
+# JWT secret (use env var in prod)
+jwt:
+  secret: your_jwt_secret_key
+  expiration: 3600000  # 1 hour
+  refresh-expiration: 2592000000  # 30 days
+
+# gRPC inventory service
+grpc:
+  client:
+    inventory-service:
+      address: static://grpc-inventory:9090
+      negotiation-type: plaintext
+
+logging:
+  level:
+    org.springframework: INFO
